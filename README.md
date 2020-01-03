@@ -81,11 +81,22 @@ We all in the developer path felt in a way or other suffer from the Impostor Syn
 
 ---
 ### Treat all developer as equalsWe need to understand that we are all professionals:
-Every developer: junior, middle, senior are a completely separate universe with their own background of technologies, patterns, paradigms and ideas.Treat every member of the team respectfully and always put their opinions on the same balance. If you don't respect their opinions, probably they will not respect yours and it will create divisions inside the team.Working with juniors and seniors developer opens a world of opportunities: in one hand we have the chance to deep into our knowledge but also make our foundations even more solid.
+We need to understand that we are all professionals:
+Every developer: junior, middle, senior are a completely separate universe with their own background of technologies, patterns, paradigms and ideas.
+
+Treat every member of the team respectfully and always put their opinions on the same balance. If you don't respect their opinions, probably they will not respect yours and it will create divisions inside the team.
+
+> Working with juniors and seniors developer opens a world of opportunities: in one hand we have the chance to deep into our knowledge but also make our foundations even more solid.
 
 ---
 ### Deadlines and code
-Deadlines are always there. Sometimes are tight and very often it produces stress and conflicts between members of the team.If we show some concerns and treat developers badly because of deadlines and code. That's means we care more about deadlines and code than the human being. Always place the people on top. Always work together not against each other. Remember we have the same goals.Tight deadlines are a direct response to the logic of Parkinson's Law, which argues that "work expands to fill the time available for its completion". By limiting the time available to complete a task, we are controlling that expansion.Remember, mainly all the time, strict short deadlines are due to the result of bad planning.
+Deadlines are always there. Sometimes are tight and very often it produces stress and conflicts between members of the team.
+
+If we show some concerns and treat developers badly because of deadlines and code. That's means we care more about deadlines and code than the human being. Always place the people on top. Always work together not against each other. Remember we have the same goals.
+
+> Tight deadlines are a direct response to the logic of Parkinson's Law, which argues that "work expands to fill the time available for its completion". By limiting the time available to complete a task, we are controlling that expansion.
+
+Remember, mainly all the time, strict short deadlines are due to the result of bad planning.
 
 https://timelyapp.com/blog/do-tight-deadlines-work
 
@@ -107,7 +118,12 @@ Try not to be over defensive all the time, doing that it will end up creating pe
 
 Juniors or Seniors will be experimenting and working under stress, and this is normal. It especially hard to reach the best result of a problem under these situations, but remember always be positive and don't worry about asking for help. Sometimes a new couple of eyes could see the problem from a different point-of-view, and maybe the result it was always there but hidden from our eyes.
 
-It is inevitable we in one way or other needs to handle the pressure and stress.Handle individual conflicts within the teamWe work with people, still do, we seeing each other every day for several hours. IF we have an issue, this issue across time can grow and becomes a real problem.We need to deal with it and mitigate team members technical and personal matters.
+It is inevitable we in one way or other needs to handle the pressure and stress.
+
+---
+### Handle conflicts
+
+We work with people, still do, we seeing each other every day for several hours. IF we have an issue, this issue across time can grow and becomes a real problem.We need to deal with it and mitigate team members technical and personal matters.
 
 Conflict is not necessarily a bad thing. Healthy and constructive conflict is a component of high-functioning teams when we encourage each other to move out of the comfortable zone.Based on my experience, the approach must be neutral so do not take aside. We need to deal with the situation immediately, remain positive and contain the situation if the situation escalates, take a break and wait for emotions to calm down and not letting conflict get personal. Then we need to listen carefully to the different parts, identify points of agreement and disagreement, prioritize the areas of conflict and create a plan of action where both parts agreed to follow and move forward together.
 
@@ -118,7 +134,16 @@ Remember, we all have the same goals and we all want the best for the company.
 
 Often very seniors developers that being in the same company, doing the same thing for years they could reach a good level of influence over other new joining senior developers. Project Managers and other Seniors Developers tend to create a binding dependency between the project and the "Hero", relying on it as if they always will be there and trusting their decisions blindly.
 
-OK, now the reality check is developers move too often from job to job and one day the smart "hero" could leave the team, leaving with the "Know-how", and there is no documentation that covers that.Desition and "know-how" must be share and handle by the team, all team members should be willing to collaborate because there is no one more important in the team, than the team itself.Ability to Teach and Learn If you want to become a truly great engineer, you should be able to swallow your ego and status.Wise senior engineers will often tell you they learn new things from junior engineers all the time.
+OK, now the reality check is developers move too often from job to job and one day the smart "hero" could leave the team, leaving with the "Know-how", and there is no documentation that covers that.
+
+> Desitions and "know-how" must be share and handle by the team, all team members should be willing to collaborate because there is no one more important in the team, than the team itself.
+
+---
+### Ability to Teach and Learn
+> If you want to become a truly great engineer, you should be able to swallow your ego and status.
+
+Wise senior engineers will often tell you they learn new things from junior engineers all the time.
+
 A wise engineer considers and accepts any information from any source. Leave your dogmas at the door.
 
 ---
@@ -131,28 +156,41 @@ If workers take ownership and treat their code or products as if it belongs to t
 {% youtube ljqra3BcqWM %}
 
 ---
-### Attitude
-Having a good, positive attitude, along with positive thinking at work will reflect on what you do and make you a more productive employee.Having a great attitude always beats having any number of years experience.MotivationI know not all the days are good, we are humans after all but stay motivated and motivate others. Find whats keep you actively motivated and the others and transform those motivations in daily activity.
+### Attitude and Motivation
+> Having a good, positive attitude, along with positive thinking at work will reflect on what you do and make you a more productive employee.
 
-Encourage yourself and other developers to stay motivated.
+I know not all the days are good, we are humans after all but stay motivated and motivate others. Find whats keep you actively motivated and the others and transform those motivations in daily activity.
+
+> Encourage yourself and other developers to stay motivated.
 
 ---
 ### Team player
-Actively promoting team empowerment. Seeking continual improvements in company culture. Great teams put their minds together. Greater problems require great teams. Trust in your team, and play together.I love to work with people that are very proud of what they achieved in the past jobs but is a sense of alarm when they are talking all the time using: "I" and not "We" or speaking badly about previous companies.Develop great teams, not just software.
+Actively promoting team empowerment. Seeking continual improvements in company culture. Great teams put their minds together. Greater problems require great teams. Trust in your team, and play together.
+
+I love to work with people that are very proud of what they achieved in the past jobs but is a sense of alarm when they are talking all the time using: "I" and not "We" or speaking badly about previous companies.
+
+> Develop great teams, not just software.
 
 ---
 ### Leadership is influence
 
-Being a successful developer and team player it will be easier if we can influence and get ourself influenced by others.Inspire others to find their voice of the Passion and Persistent. When you cast a vision, enrol your followers to express their voice as co-creators and co-contributors to the vision.Develop a culture in which employees are given ownership over decisions.
+Being a successful developer and team player it will be easier if we can influence and get ourself influenced by others.
+
+Inspire others to find their voice of the Passion and Persistent. When you cast a vision, enrol your followers to express their voice as co-creators and co-contributors to the vision.
+
+> Develop a culture in which employees are given ownership over decisions.
 
 ---
-### Easy going
-Probably the hardest one. Here a great engineer should be fun to work with, non-lethargic, and ready to take on challenges.We need to keep in mind, we as many others have good and bad days.Based on my experience, I found better results when we focus on the excellence of the code but prioritising on the team members knowledge sharing, others point-of-view and accept that more often than we think: we are wrong. So what we do then? Learn and evolve.
+### Accept the challenge
+Probably the hardest one. Here a great engineer should be fun to work with, non-lethargic, and ready to take on challenges.
+
+Based on my experience, I found better results when we focus on the excellence of the code but prioritising on the team members knowledge sharing, others point-of-view and accept that more often than we think: we are wrong. So what we do then? Learn and evolve.
 
 ---
 ### Culture company
-Company culture is defined by how people inside the organization interact with each other. Company culture is a set of, sometimes no written, business buzzwords that setup behaviour and actions from the top CEO to the bottom of the company.
+Company culture is defined by how people inside the organization interact with each other.
+
+Company culture is a set of, sometimes no written, business buzzwords that setup behaviour and actions from the top CEO to the bottom of the company.
 
 Leaders must embrace the company culture and enhance, even model the behaviour they want the organization to emulate is necessary.
-
 {%  youtube gficoigz1xs %}
