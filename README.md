@@ -1,4 +1,4 @@
-# Becomes a tryly great Lead Software Engineer
+# Becomes a truly great Lead Software Engineer
 
 ### Lead with empathy
 Empathy is the ability to understand and share another person's experience, perspective and feelings. 
