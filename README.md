@@ -73,7 +73,8 @@ As a manager, employ people to do a job, teach them well and let them do what yo
 
 We all in the developer path felt in a way or other suffer from the Impostor Syndrome.Here is a fact: Technologies change too fast for us to be an expert in all aspects. So, no matter your skill level, no matter your position, you are not an impostor. Know your accomplishments. Don't play to compare game. You are where you are because you make it possible.
 
-"Don't get distressed because you aren't an expert in the en vogue framework or you haven't yet learned a functional programming language. Paradoxically, the fact that you're self-aware enough to have impostor syndrome in and of itself means that you shouldn't think of yourself as an impostor. You are aware of the limits of your knowledge. You know what you need to learn to stay competitive, or advance your career, or stay at the cutting edge of your particular niche."The people who don't have impostor syndrome are the ones you want to avoid.
+> "Don't get distressed because you aren't an expert in the en vogue framework or you haven't yet learned a functional programming language. Paradoxically, the fact that you're self-aware enough to have impostor syndrome in and of itself means that you shouldn't think of yourself as an impostor. You are aware of the limits of your knowledge. You know what you need to learn to stay competitive, or advance your career, or stay at the cutting edge of your particular niche."The people who don't have impostor syndrome are the ones you want to avoid."
+
 @awwsmm - https://dev.to/awwsmm/youre-not-an-impostor-1boi
 
 ---
