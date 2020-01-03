@@ -1,1 +1,1 @@
-#' Personal publication at: [https://dev.to/leolanese](https://dev.to/leolanese)
+#' Store for Personal publication from: [https://dev.to/leolanese](https://dev.to/leolanese)
