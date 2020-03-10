@@ -1,0 +1,171 @@
+---
+title: Simple takeaway Angular calendar 
+published: true
+description: A takeaway calendar page using font-awesome and Angular
+tags: Angular, fontAwesome, icons, calendar
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/ydg4ovumxssvts4pc6vu.jpg
+---
+
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/r4uuslnrjhh0thxh145w.png)
+
+### Github:
+<a href="https://stackblitz.com/edit/angular-simple-icon-calendar" targer="_blank">Simple Calendar Angular</a>
+
+### Code
+<sub>app.module</sub>
+```javascript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+
+// solid icons use the prefix ‘fas’
+// regular icons use the prefix ‘far’
+// brand  ‘fab’
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far, faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+@NgModule({
+  imports:      [ 
+    BrowserModule, 
+    FormsModule,
+    FontAwesomeModule
+    ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})
+export class AppModule { 
+  constructor() {
+    library.add(fas, far, fab);
+  }
+}
+```
+
+
+<sub>Component</sub>
+```javascript
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ],
+})
+export class AppComponent implements OnInit {
+  dates = new Date();
+  componentDate: number;
+  componentYear: number;
+  componentMonth: number;
+  componetHour: number;
+  componetMinute: number;
+
+  // solid icons use the prefix ‘fas’
+  fasCalendar = ['fas', 'calendar'];
+  fabAngular = ['fab', 'angular'];
+  
+  ngOnInit() {
+    this.componentDate = this.dates.getDate();
+    this.componentYear = this.dates.getFullYear();
+    this.componentMonth = this.dates.getMonth();
+    this.componetHour = this.dates.getHours();
+    this.componetMinute = this.dates.getMinutes();
+  }
+}
+```
+
+<sub>Template</sub>
+```javascript
+<fa-layers>
+
+    <fa-icon 
+    [icon]="fasCalendar"
+     size="8x"
+     transform="down-5"
+    ></fa-icon>
+
+    <fa-icon style="color:red"
+     [icon]="fabAngular"
+     size="1g"
+     transform="down-5 right-40">
+    ></fa-icon>
+
+    <fa-layers-text 
+     content="{{ (componentMonth > 9)? componentMonth: '0' + componentMonth }}" 
+     transform="down-5 right-10"
+     ></fa-layers-text>
+
+    <fa-layers-text 
+     content="{{componentYear}}" 
+     transform="down-5 right-80"
+     ></fa-layers-text>
+
+    <fa-layers-text 
+      content="{{ (componentDate > 9)? componentDate: '0' + componentDate }}" 
+      transform="down-14 right-12"
+      size="4x"
+    ></fa-layers-text>
+
+    <fa-layers-text 
+      content="{{ componetHour }}" 
+      transform="down-95 right-30"
+      size="1x"
+    ></fa-layers-text>
+
+    <fa-icon 
+      [icon]="['fas', 'cog']" 
+      transform="down-98 right-45 shrink-12" 
+      style="color: #fff"
+      [spin]="true"
+    ></fa-icon>
+    <fa-icon 
+      [icon]="['fas', 'cog']" 
+      [spin]="true"
+      style="color: #fff"
+      transform="down-92 right-45 shrink-12" 
+    ></fa-icon>
+
+    <fa-layers-text 
+      content="{{ (componetMinute > 9)? componetMinute: '0' + componetMinute }}" 
+      transform="down-95 right-60"
+      size="1x"
+    ></fa-layers-text>
+
+</fa-layers>
+```
+---
+
+### Other Related Posts:
+*<a href="https://dev.to/leolanese/simple-angular-8-input-toggle-using-fontawesome-19g5" target="_blank">Simple takeAway Angular input toggle using Font Awesome</a>
+*<a href="https://dev.to/leolanese/equality-strict-equality-operators-in-javascript-2dgh" target="_blank">Equality & strict-Equality Operators in javaScript</a>
+*<a href="https://dev.to/leolanese/making-unit-test-fun-again-with-functional-programming-4g8m" target="_blank">Making unit-test fun again with Functional Programming</a>
+
+---
+
+Image by <a href="https://pixabay.com/users/StockSnap-894430/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2620118">StockSnap</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2620118">Pixabay</a>
+
+---
+
+<h5> { 'Leo Lanese',<br>
+       'Building Inspiring Responsive Reactive Solutions',<br>
+       'London, UK' }<br>
+</h5>
+<h5>Portfolio
+<a href="http://www.leolanese.com" target="_blank">http://www.leolanese.com</a>
+</h5>
+<h5>Twitter:
+<a href="http://twitter.com/LeoLaneseltd" target="_blank">twitter.com/LeoLaneseltd</a>
+</h5>
+<h5>Questions / Suggestion / Recommendation ?
+<a href="mail:to">developer@leolanese.com</a>
+</h5>
+<h5>DEV.to:
+<a href="http://www.dev.to/leolanese" target="_blank">www.dev.to/leolanese</a>
+</h5>
+<h5>Blog:
+<a href="http://www.leolanese.com/blog" target="_blank">leolanese.com/blog</a>
+</h5>
