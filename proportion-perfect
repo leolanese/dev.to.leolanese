@@ -1,0 +1,59 @@
+---
+title: It's not 'pixel-perfect', it's 'proportion-perfect'
+published: true
+description: Going beyond simple pixel-width conditions to a more fluid and progressive enhancement of our proportional-perfect solution
+tags: design, propotionPerfect, mobileFirst, Responsive
+---
+
+### Going beyond simple pixel-width conditions:
+
+I had the pleasure to chat about this topic with <a href="https://bradfrost.com/" target="_blank"> Brad Frost - @brad_frost</a> and some others ideas in the workshop he gave in London: "Reason to be Responsive", a few years ago, since then it looks like the idea about "how to delivery designs" still not growing up.
+
+
+### The issue
+
+In the past, designers sold websites like pieces of art, but they are more than that: These are software engineering masterpieces, not just simple pictures to show on powerpoint or a single printed paper, leaving to the imagination of the developer how the UI design should look, but also in a way how it should work. 
+
+In the graceful degradation era, I worked with really good quality designers who were wasting a lot of time creating pixel-perfect desktop websites. We used to strictly match a rigid design: borders, shadows, degrades, etc.
+
+Times change, technology evolves, now we are living the Mobile First, Progressive and Responsive Web Design era. Going beyond simple pixel-width conditions is the future because the content is the king of your application, that's is where the money is, the final goal we need to display, the masterpiece you want to represent. 
+The environments that show the content are just an instrument to represent the beauty o the content.
+
+
+### Everything is about features
+
+> Let's stop thinking about our application as an empty Small (320px), Medium (480px) and Large (960px) "Tupperwares", let's break the design papers and think into features.
+
+We can create single solutions to run across multiple environments. We want to deliver the best possible product to the user device to increase the UX/UI. We understand that screen size is just a feature of our temporal environment, like js features or CSS features, internet connection feature, GeoLocation feature, HTML support features and so many advanced features that we already step by step draw our environmental context to determinate not where we are, but how can my unique progressive application far can go.
+ 
+Based on this, we can not create a 'pixel-perfect layout' for every single device, we still following the Design but on a proportion-measure way. We are moving from 'Graceful Degradation' to a 'Progressive Enhancement' paradigm.
+
+> Proportion is the appropriate relation to the size, shape, or position of other components.
+
+We could create a flexible scalable feature responsive web design. We need to be enlightened that the design changes proportionally depending on the features. So rather than smartwatches, iphone10, iPad, Laptop, PC or just for the sick of the simplicity Small, Medium and Large pixel-perfect layouts we can use a "fluid proportional design".
+
+> It's no longer pixel-perfect design, let's start thinking: "Proportion-Perfect design".
+
+Don't get me wrong. Let's understand that even in this Responsive Web era the pixel-perfect could be possible(ish) but we can potentially use the same effort to increase the performance, UX and security of our application.
+
+---
+
+<h5> { 'Leo Lanese',<br>
+       'Building Inspiring Responsive Reactive Solutions',<br>
+       'London, UK' }<br>
+</h5>
+<h5>Portfolio
+<a href="http://www.leolanese.com" target="_blank">http://www.leolanese.com</a>
+</h5>
+<h5>Twitter:
+<a href="http://twitter.com/LeoLaneseltd" target="_blank">twitter.com/LeoLaneseltd</a>
+</h5>
+<h5>Questions / Suggestion / Recommendation ?
+<a href="mail:to">developer@leolanese.com</a>
+</h5>
+<h5>DEV.to:
+<a href="http://www.dev.to/leolanese" target="_blank">www.dev.to/leolanese</a>
+</h5>
+<h5>Blog:
+<a href="http://www.leolanese.com/blog" target="_blank">leolanese.com/blog</a>
+</h5>
