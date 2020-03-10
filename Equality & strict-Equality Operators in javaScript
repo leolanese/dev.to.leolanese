@@ -1,0 +1,306 @@
+---
+title: Equality & strict-Equality Operators in javaScript
+published: true
+description: Simple definition with examples about Equality & strict Equality Operators in javaScript
+tags: javaScript, bestPractices, equalityOperators, performance
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/cwszel3pimemlhipqa19.jpg
+---
+
+### Strict/no-strict Equality Goals:
+
+> Both ==, === are operators.
+
+Operator == is a has a function and === is has a different function goal.
+
+---
+
+### Strict/no-strict Equality Functionality:
+####'==' is -equality- operator:
+1) Compares if the operands are of the "same type" and have the "same value".
+2) If they have "different type" we will "coerce/convert type" and then evaluate again.
+
+####'===' is -strict equality- operator:
+1) Compares if the operands are of the "same type" and have the "same value".
+2) If they are "different type" = are different.
+We DON’T doing any "type conversions"
+
+---
+
+### Strict/no-strict Equality Performance:
+'=='  Coerce the value, this longer with sometimes unexpected  results
+'===' Don't coerce, and takes short time
+
+
+#### Performance study case:
+```javascript
+const arr1 = ['a', 'b', 'c', 'd', 'e'];
+console.time('time');
+const arr2 = arr1.map(item => {
+  if(item == 'c') { // coercing takes a little extra effort
+    item = 'CAT';
+  }
+console.timeEnd('time');
+  return item;
+}); 
+// ['a', 'b', 'CAT', 'd', 'e']
+// time: 0.041015625ms
+```javascript
+
+```javascript
+const arr1 = ['a', 'b', 'c', 'd', 'e'];
+console.time('time');
+const arr2 = arr1.map(item => {
+  if(item === 'c') { // don't coerce = faster
+    item = 'CAT';
+  }
+console.timeEnd('time');
+  return item;
+}); 
+// ['a', 'b', 'CAT', 'd', 'e']
+// time: 0.02783203125ms
+```
+
+##### Results:
+
+=== Don't coerce, and takes short time
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/9a0nor5i8bog9h8dqtqa.PNG)
+
+
+```javascript
+0.041015625 > 0.02783203125 = true
+```
+
+---
+
+
+### Strict/no-strict Equality Differences:
+Coercion / Conversion type.
+Converting a value from one type to another, this take extra time and some times is not what we expect.
+Both are comparing same things. But 'identical' will be quicker if type are not the same, because wont't convert type.
+
+#### Why
+Internally JS has actually two different approaches for testing equality: Primitives like strings and numbers are compared by their value, while objects like arrays, dates, and plain objects are compared by reference. Comparison by reference basically checks to see if the objects given refer to the same location in memory allocation.
+
+```javascript
+1 == "1"; // true (apostrophe)
+number == string => coerce: get typeof of each operator
+String(1); // string: course first operand (check operand table) with the second operand type
+"1" == "1" // wrong true: compared after coerce
+```
+
+---
+
+#### Strict/no-strict Equality Case studies: 
+
+##### 1) Comparing string literal with a string object created with the string constructor.
+
+```javascript
+"test" == new String("test")    // true
+"test" === new String("test")   // false
+
+1 == '1'; // true
+NaN === null; // false => typeof(NaN) = number typeof(undefined) =
+'' == 0;  // true
+'' === 0; // false
+false == 0 // true
+[] === []; false :(
+[1,2] === [1,2]; // false :(
+{} === {}; // false :(
+
+typeof(NaN);  //number
+typeof('');   //string
+typeof(undefined);  //undefined
+
+"" == 0; // true
+"" === 0; // false
+false == '0'        // true
+null == undefined   // true
+
+3 == "00003"; // true
+3 === "00003"; // false
+```
+
+##### 1) Using null with '<' and '>' combination 
+
+```javascript
+null < 1 // true
+1 < 2 < 3 // true
+3 < 2 < 1 // true
+```
+#### Reason:
+First evaluate: '3 < 2' = false = 0, then 'false < 1' = true, so: true
+
+
+##### 2) Using null guard
+
+> null:
+> null is an empty or non-existent value.
+> null must be assigned: null is an assigned value. It means nothing.
+
+In JS null is "nothing". It is "supposed" to be something that doesn't exist. Unfortunately, in JS, the data type of 'null' is considered an JS object 
+
+##### typeof bar === "object"
+```javascript
+var bar = null;
+console.log(typeof bar === "object"); // logs true! -> null object?
+```
+
+##### better do
+```javascript
+var bar = null;
+console.log((bar !== null) && (bar.constructor === Object)); // logs false
+```
+
+##### 3) Using typeof obj === "function"
+
+```javascript
+function isObject(obj) {
+    return (typeof obj === "object" && obj !== null) || typeof obj === "function";
+}
+
+// Test:
+function sumArguments() {
+  return Array.from(arguments).reduce((sum, num) => sum + num);
+}
+isObject(sumArguments); //  true
+```
+
+##### 3) Object Equality in JavaScript
+
+```javascript
+const object = { 'a': 1 };
+const other = { 'a': 1 };
+object == other; // false
+```
+
+```javascript
+const object = { 'a': 1 };
+const other = { 'a': 1 };
+object === other; // false
+```
+
+#### Why?
+Object and other refer to two objects with identical properties, but they are each distinct instances.
+
+
+#### Quick way to compare:
+
+```javascript
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+JSON.stringify(object) === JSON.stringify(other); // true
+```
+
+```javascript
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+JSON.stringify(object) == JSON.stringify(other); // true
+
+```
+
+#### Done?
+YAY! happy times JSON.stringify() will do it! ... Nop, this method converts objects to strings first and comparison takes place afterwards. Problem is the order of the keys:
+
+```javascript
+var object = { 'a': 1, 'b': 2 };
+var other = { 'b': 2, 'a': 1 };
+JSON.stringify(object) == JSON.stringify(other); // false
+```
+
+```javascript
+var object = { 'a': 1, 'b': 2 };
+var other = { 'b': 2, 'a': 1 };
+JSON.stringify(object) === JSON.stringify(other); // false
+```
+
+A solution to the JSON.stringify() key order can theoretically resolve converting this  'Object' to 'Array of Object', and then use Array.prototype.sort() (ES9 sort could be better) and finally JSON.stringify() but we also need to do this process across the whole deep of the nested object. I rather simple face the problem with an alternative approach like using: "Deep's" Equal, "Lodash's" isEqual or "Fast's" Equals. Let's have a look at the "Lodash's"  solution:
+
+
+#### We need to use a deep comparison: 
+
+Looking for objects value equality using Lodash:
+
+```javascript
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+
+object === other; // => false
+ 
+_.isEqual(object, other); // true
+ 
+```
+
+#### The base implementation of `_.isEqual` which supports partial comparisons * and tracks traversed objects.
+
+```javascript
+// source: https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L11567
+
+    /**
+     * The base implementation of `_.isEqual` which supports partial comparisons
+     * and tracks traversed objects.
+     *
+     * @private
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @param {boolean} bitmask The bitmask flags.
+     *  1 - Unordered comparison
+     *  2 - Partial comparison
+     * @param {Function} [customizer] The function to customize comparisons.
+     * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+     * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+     */
+    function baseIsEqual(value, other, bitmask, customizer, stack) {
+      if (value === other) {
+        return true;
+      }
+      if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+        return value !== value && other !== other;
+      }
+      return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+    }
+
+```
+
+---
+
+
+### Conclusion level 6:
+
+Both are comparing same things, but '==' allows coercion, and '===' disallows coercion, making === faster and more accurate.
+
+Both '==' and '===' check the types of their operands. The difference is in how they respond if the types don't match.
+
+
+### Extra take-away recomendation:
+Please Avoid '==' operator, can cause potential coerce errors.
+Please Use '===' operator, and also make it faster or we "~can" use Object.is()*
+
+```javacript
+// * No support on IE11 only IE12+ 
+
+Object.is( 1, "1"); // false 
+Object.is('foo', 'foo');     // true
+Object.is(null, null);       // true
+```
+
+---
+
+#### Further Information:
+
+### Object.is()
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+
+### Comparison table:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+
+### _isEqual()
+https://lodash.com/docs/4.17.15#isEqual
+
+### fast-equals
+https://www.npmjs.com/package/fast-equals
+
+### deep-equal
+https://www.npmjs.com/package/deep-equal
+
+
