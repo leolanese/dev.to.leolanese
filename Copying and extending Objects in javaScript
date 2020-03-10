@@ -1,0 +1,622 @@
+---
+title: Copying and extending Objects in javaScript
+published: true
+description: We are going to review few of the most popular techniques to copy and extend javaScript Objects
+tags: javascrpt, deepCopy, shallowCopy, ES6
+---
+
+
+
+
+1) Copying Objects
+--[1.1] Copying plain Objects
+--[1.2] Copying deeply nested Objects
+
+2) Extending Objects
+--[2.1] Extending plain Objects
+--[2.2] Extending deeply nested Objects
+
+---
+
+### 1) Copying plain Objects:
+
+#### [1.1] Copying plain Objects
+
+Simple Array of Object
+```javascript
+const object = {
+  'color': 'red'
+};
+
+// shallow copy
+copyObjectAssign = Object.assign({}, object);
+// shallow copy
+copySpread = { ...object};
+// ~deep copy
+copyJSONparse = JSON.parse(JSON.stringify(object));
+
+object.color = 'blue'; // changing original object
+
+object === copyJSONparse; // FALSE
+object === copyObjectAssign; // FALSE
+object === copySpread ; // FALSE
+
+```
+
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+%}
+const object = {
+  'color': 'red'
+};
+
+// shallow copy
+copyObjectAssign = Object.assign({}, object);
+// shallow copy
+copySpread = { ...object};
+// ~deep copy
+copyJSONparse = JSON.parse(JSON.stringify(object));
+
+object.color = 'blue'; // changing original object
+
+console.log(object === copyJSONparse); // FALSE
+console.log(object === copyObjectAssign); // FALSE
+console.log(object === copySpread); // FALSE
+
+{% endrunkit %}
+
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/qw59xxdfzwfoapzzvg1w.png)
+
+
+
+#### [1.2] Copying deeply nested Objects
+These are Objects that have more than one level deep
+
+```javascript
+const objectNested = {
+  "color": "red",
+  "car": {
+    "model": {
+       year: 2020
+    }
+  }
+};
+// shallow copy
+copyObjectAssignNested = Object.assign({}, objectNested );
+// shallow copy
+copySpreadNested = { ...objectNested };
+// ~deep copy
+copyJSONparseNested = JSON.parse(JSON.stringify(objectNested));
+
+// changing the original objectNested
+objectNested.car.model.year = 1975; // change here
+
+// original object IS changed!
+objectNested // {"color":"red", "car":{"model": { year: 1975 }}
+
+// shallow-copy IS changed! 
+copyObjectAssignNested // {"color":"red", "car":{"model": { year: 1975 }}
+copySpreadNested // {"color":"red", "car": {"model": { year: 1975 }}
+
+// deep-copy NOT changed: deepClone Object won't have any effect if the main source object obj is modified and vice-versa
+copyJSONparseNested //  {"color":"red", "car": {"model": { year: 2020 }}
+
+// let see what changes then?
+JSON.stringify(objectNested) === JSON.stringify(copyObjectAssignNested); // TRUE
+JSON.stringify(objectNested) === JSON.stringify(copySpreadNested); // TRUE
+JSON.stringify(objectNested) === JSON.stringify(copyJSONparseNested);  // FALSE (changes don't affect each other after deep-copy)
+```
+
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+const hiddenVar = 42
+%}
+const objectNested = {
+  "color": "red",
+  "car": {
+    "model": {
+       year: 2020
+    }
+  }
+};
+// shallow copy
+copyObjectAssignNested = Object.assign({}, objectNested );
+// shallow copy
+copySpreadNested = { ...objectNested };
+// ~deep copy
+copyJSONparseNested = JSON.parse(JSON.stringify(objectNested));
+
+// changing the original objectNested
+objectNested.car.model.year = 1975; // change here
+
+// original object IS changed!
+objectNested // {"color":"red", "car":{"model": { year: 1975 }}
+
+// shallow-copy IS changed! 
+copyObjectAssignNested // {"color":"red", "car":{"model": { year: 1975 }}
+copySpreadNested // {"color":"red", "car": {"model": { year: 1975 }}
+
+// deep-copy NOT changed: deepClone Object won't have any effect if the main source object obj is modified and vice-versa
+copyJSONparseNested //  {"color":"red", "car": {"model": { year: 2020 }}
+
+// let see what changes then?
+console.log(JSON.stringify(objectNested) === JSON.stringify(copyObjectAssignNested)); // TRUE
+
+console.log(JSON.stringify(objectNested) === JSON.stringify(copySpreadNested)); // TRUE
+
+console.log(JSON.stringify(objectNested) === JSON.stringify(copyJSONparseNested)); // FALSE (changes don't affect each other after deep-copy)
+{% endrunkit %}
+
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/r507tyxk8uka1mfoyf4y.PNG)
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/cdwtpacpmfe2jpy1awsx.PNG)
+
+
+### Why:
+- Object.assign({})
+Can only make shallow copies of objects so it will only work in a single level (first level) of the object reference.
+
+- Object spread:
+Object spread does a 'shallow copy' of the object. Only the object itself is cloned, while "nested instances are not cloned".
+
+- JSON.parse(JSON.stringify()):
+This is a questionable solution. Why? Because this is going to work fine as long as your Objects and the nested Objects "only contains primitives", but if you have objects containing functions or 'Date' this won't work. 
+
+Changing a property value from the original object or property value from the shallow copy object it will affect each other.
+
+The reason is how the javascript engine works internally: JS passes the primitive values as value-copy and the compound values as reference-copy to the value of the primitives on that Object. So, when copied the Object containing the nested Object, that will create a shallow-copy of that Object:
+
+Primitive found on the first level of the original object it will be copied as value-copy: changing is reciprocal: changing the value of one will affect the other one. So they will be depending on each other
+
+Deeply nested properties will be copied as reference-copy: changing one it will not affect the reference of the other one
+
+> first-level properties: value-copy
+> deeply nested properties: reference-copy
+
+
+### <u>Solution:</u>
+We can create our own or we can use the third-party libraries to achieve a future-proof deep copy and deep merge.
+
+#### Third party solutions:
+
+lodash's cloneDeep()
+```javascript
+import * as cloneDeep from 'lodash/cloneDeep';
+...
+clonedObject = cloneDeep(originalObject);
+```
+
+```javascript
+const objectNested = {
+  "name":"John",
+  "age":30,
+  "cars": {
+    "car1":"Ford",
+    "car2":"BMW",
+    "model": {
+       year: 2020
+    }
+  }
+};
+ 
+// making a copy of the reference, a new object is created that has an exact copy of the values in the original object.
+const deep = _.cloneDeep(objectNested);
+console.log(JSON.stringify(deep) === JSON.stringify(objectNested)); // TRUE
+console.log("deep reference", deep.cars.model === objectNested.cars.model); // FALSE
+
+// assinging one Object to other reference
+const deep2 = objectNested;
+console.log('share reference', deep2.cars.model === objectNested.cars.model); // TRUE
+console.log('share references', deep2 === objectNested); // TRUE
+```
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/k09c792xe2wrf2hsgqgy.png)
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/3nbrax7gsbhnr5tf55u7.png)
+
+
+### Lodash cloneDeep()
+```javascript
+var objects = [{ 'a': 1 }, { 'b': 2 }];
+ 
+var deepCopy = _.cloneDeep(objects);
+console.log(deepCopy[0] === objects[0]); // => false
+objects[0].a === deepCopy[0].a // true
+
+deep[0].a = 123; // original object changes
+objects[0].a === deepCopy[0].a // false = changes no affecting deepCopy
+```
+
+
+
+### Further Information:
+Lodash
+https://lodash.com/docs/4.17.15#cloneDeep
+
+Lodash npm package:
+https://www.npmjs.com/package/lodash.clonedeep
+
+Immutability-helper:
+A light and easy to use helper which allows us to mutate a copy of an object without changing the original source: 
+https://github.com/kolodny/immutability-helper
+
+
+---
+
+
+### 2) Extending Objects
+
+Few options we are going to evaluate:
+
+```html
+   JS            |  JS ES6+          |    jQuey        |  Lodash     |  AngularJS
+Object.assign()    Spread operator      $.extend()       .merge()      .extend()  
+mix()                                                                  .merge() 
+```                                     
+
+#### [2.1] Extending plain Objects
+Extend Objects is a simple process but required to know what we want to do with:
+- Objects that have the same name attributes
+- Mutation of the Object
+
+
+### Object.assign({}):
+```javascript
+let defaults = {
+  container:       ".main",
+  isActiveClass:   ".is-active"
+};
+
+let options1 = {
+  container:       ".main-container",
+  isActiveClass:   ".is-active-element"
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   ".is-active-content"
+};
+
+settings = Object.assign({}, defaults, options1, options2); // using {}
+// { container: ".main-container", isActiveClass: ".is-active-content", aNewClass: "somethingHere"}
+```
+
+
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+const hiddenVar = 42
+%}
+// visible, reader-editable JavaScript code goes here
+let defaults = {
+  container:       ".main",
+  isActiveClass:   ".is-active"
+};
+
+let options1 = {
+  container:       ".main-container",
+  isActiveClass:   ".is-active-element"
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   ".is-active-content"
+};
+
+console.log(settings = Object.assign({}, defaults, options1, options2)); // using {}
+// { container: ".main-container", isActiveClass: ".is-active-content", aNewClass: "somethingHere"}
+{% endrunkit %}
+
+
+
+Further information:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+---
+
+
+### Custom .mix() method for ES5 and earlier:
+#### Flat Object
+
+Add an  Object2 to another Object1: 
+$.extend() like, but DO NOT replace similar keys = the FIRST OBJECT WILL PREVAIL
+We are navigating thought the flat object and '=' the values.
+
+```javascript
+// source
+options = {
+  underscored: true,
+  "name": 1
+}
+// target
+products = {
+  foo: false,
+  "name": "leo"
+}
+
+function mix(source, target) {
+  for(var key in source) {
+     if (source.hasOwnProperty(key)) {
+       target[key] = source[key];
+     }
+  }
+ console.log(target)
+}
+mix(options, products); // { foo: false, name: 1, underscored: true }
+```
+
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+const hiddenVar = 42
+%}
+// visible, reader-editable JavaScript code goes here
+options = {
+  underscored: true,
+  "name": 1
+}
+// target
+products = {
+  foo: false,
+  "name": "leo"
+}
+
+function mix(source, target) {
+  for(var key in source) {
+     if (source.hasOwnProperty(key)) {
+       target[key] = source[key];
+     }
+  }
+ console.log(target)
+}
+console.log(mix(options, products)); // { foo: false, name: 1, underscored: true }
+{% endrunkit %}
+
+
+---
+
+### ES6 Spread operator
+
+```javascript
+let defaults = {
+  container:       "main",
+  isActiveClass:   "is-active",
+  code: {
+    description: 'default code'
+  }
+};
+
+let options1 = {
+  container:       "main-container",
+  isActiveClass:   "is-active-element",
+  code: {
+    description: 'options1 code'
+  }
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   "is-active-content",
+  code: {
+    description: 'options2 code'
+  }
+};
+
+mergedObj = { ...defaults , ...options1, ...options2 };
+
+// { aNewClass: "somethingHere"
+     code: {
+        description: "options2 code"
+     },
+     container: "main-container"
+     isActiveClass: "is-active-content"
+   }
+```
+
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+const hiddenVar = 42
+%}
+// visible, reader-editable JavaScript code goes here
+let defaults = {
+  container:       "main",
+  isActiveClass:   "is-active",
+  code: {
+    description: 'default code'
+  }
+};
+
+let options1 = {
+  container:       "main-container",
+  isActiveClass:   "is-active-element",
+  code: {
+    description: 'options1 code'
+  }
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   "is-active-content",
+  code: {
+    description: 'options2 code'
+  }
+};
+
+console.log(mergedObj = { ...defaults , ...options1, ...options2 });
+// { aNewClass: "somethingHere", code: {description: "options2 code"},container: "main-container",isActiveClass: "is-active-content"}
+{% endrunkit %}
+
+If some objects have a property with the same name, then the second object property overwrites the first. If we don't want this behaviour we need to perform a 'deep merge' or object and array recursive merge. 
+
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/82on9hpaduezhlv11blt.PNG)
+
+
+Further information:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
+---
+
+### $.extend()
+
+It is a jQuery function that will extend and replace similar keys.
+
+#### $.extend() replace similar keys:
+
+```javascript
+const defaults = { d1: false, d2: 5, d3: "foo" };
+const options = { d4: true, d6: "bar" };
+
+// jQuery Merge object2 into object1 (modifying there results)
+$.extend( defaults, options );
+// Object {d1: false, d2: 5, d3: "foo", d4: true, d6: "bar"}
+```
+
+#### $.extend() without replace similar keys:
+Remember that Javascript objects are mutable and store by reference.
+
+```javascript
+const defaults = { validate: false, limit: 5, name: "foo" };
+const options = { validate: true, name: "bar" };
+
+// Merge defaults and options, without modifying defaults
+settings = $.extend({}, defaults, options);
+Object {validate: true, limit: 5, name: "bar"}
+```
+
+Further information:
+jquery.extend()
+https://api.jquery.com/jquery.extend
+
+---
+
+### Lodash .merge()
+
+"This method is like _.assign except that it recursively merges own and inherited enumerable string keyed properties of source objects into the destination object. Source properties that resolve to undefined are skipped if a destination value exists. Array and plain object properties are merged recursively. Other objects and value types are overridden by assignment. Source objects are applied from left to right. Subsequent sources overwrite property assignments of previous sources."
+<sub><sub>https://lodash.com/docs/4.17.15#merge</sub></sub>
+
+
+> Note: This method mutates object.
+
+
+Using Lodash .merge() with first level (flat) object
+
+```javascript
+let defaults = {
+  container:       "main",
+  isActiveClass:   "is-active"
+};
+
+let options1 = {
+  container:       "main-container",
+  isActiveClass:   "is-active-element"
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   "is-active-content"
+};
+
+_.merge(defaults, options1, options2);
+
+_.merge(defaults, options1, options2);
+// { aNewClass: "somethingHere", container: "main-container", isActiveClass: "is-active-content"}
+```
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/nw7wsmuv8suvw4bd07lm.PNG)
+
+
+Using Lodash .merge() with deeply nested object:
+```javascript
+let defaults = {
+  container:       "main",
+  isActiveClass:   "is-active",
+  code: {
+    description: 'default code'
+  }
+};
+
+let options1 = {
+  container:       "main-container",
+  isActiveClass:   "is-active-element",
+  code: {
+    description: 'options1 code'
+  }
+};
+
+let options2 = {
+  aNewClass:       "somethingHere",
+  isActiveClass:   "is-active-content",
+  code: {
+    description: 'options2 code'
+  }
+};
+
+_.merge(defaults, options1, options2);
+
+// {
+  aNewClass: "somethingHere"
+  code: {
+    description: "options2 code"
+  },   
+  container: "main-container"
+  isActiveClass: "is-active-content"
+}
+```
+
+
+
+#### [2.2] Extending deeply nested Objects
+
+
+#### AngularJS 'angular.extend()' and 'angular.merge()':
+
+> angular.merge() it will be preserving properties in child objects. 
+
+> angular.extend() it will not preserve, it will replace similar properties
+
+It does a deep copy of all properties from source to destination preserving properties in child objects. Note how we can also use multiple source objects that will be merged in order:
+
+```javascript
+const person1 = {
+  name: 'Leo',
+  address: {
+    description: 'Oxford Street'
+  }
+}
+const person2 = {
+  id: 1,
+  address : {
+    postcode: 'SW1'
+  }
+}
+const merged = angular.merge(person1, person2); // ALL the similar WILL PREVAIL
+// merged object
+// {id: 1, name:'Leo', address:{description:'Oxford Street',postcode: 'SW1'}}
+
+const extended = angular.extend(person1, person2); // replace similar properties
+// extended object
+// {id: 1, name:'John', address:{postcode:'SW1'}}
+```
+
+
+
+---
+
+<h5> { 'Leo Lanese',<br>
+       'Building Inspiring Responsive Reactive Solutions',<br>
+       'London, UK' }<br>
+</h5>
+<h5>Portfolio
+<a href="http://www.leolanese.com" target="_blank">http://www.leolanese.com</a>
+</h5>
+<h5>Twitter:
+<a href="http://twitter.com/LeoLaneseltd" target="_blank">twitter.com/LeoLaneseltd</a>
+</h5>
+<h5>Questions / Suggestion / Recommendation ?
+<a href="mail:to">developer@leolanese.com</a>
+</h5>
+<h5>DEV.to:
+<a href="http://www.dev.to/leolanese" target="_blank">www.dev.to/leolanese</a>
+</h5>
+<h5>Blog:
+<a href="http://www.leolanese.com/blog" target="_blank">leolanese.com/blog</a>
+</h5>
