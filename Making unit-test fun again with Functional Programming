@@ -1,0 +1,139 @@
+---
+title: Making unit-test fun again with Functional Programming
+published: true
+description: 
+tags: unit-test, functional, programming, FP, javascript
+---
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/lj3mtju1innkmkvof9eb.jpg)
+
+
+## Architecture necessity
+
+Unit-Test is an essential part of a Software Development, it is considered a good practice and it is not an option, it is a necessity.
+
+In brief, helps us to test not just what we are doing but also allow us to isolate building blocks of code, trust on them and continue building and sleeping well at night.
+
+Any solution will not be going to be complete without testing the functionality, while we all agreed about this on the other hand unit-test takes time and are not really fun, at least not all the time, so independently of which approach we choose: TDD (Test Driven Development) or WTA (Write Test After) tests are going to be part of the final solution.
+
+
+## Test oriented code with Functional Programming 
+
+> "Code that is hard to test is not good code", Joe Eames
+
+Before or after we will find our self-writing unit-test to validate the code is working as expected and produce the functionality accordingly. Here is when we can spend more or less time depending on the complexity of the code. Complexity and that can be simplified with pure code without side effect and abstraction.
+
+> Let's remember, simply put, functional programming is about programming with functions.
+
+Making multiple small pure functions can actually simplify the complexity of the unit-test, making our code more portable, reusable and predictable and as a result; easy to test.
+
+
+
+
+## Declarative and Imperative paradigms control flow:
+Programming languages are generally divided into a spectrum of two sides: Declarative and Imperative paradigms. 
+
+
+> Declarative languages tell the computer "what to do", while imperative languages tell the computer "how to do it".
+
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/worqt08qusmc619j0tp4.jpg)
+
+
+
+### Imperative Paradigm flow: "How to do it" parts to be tested:
+In Imperative approach we follow the control, a developer writes code that describes in exacting detail the steps that the computer must take to accomplish the goal (how to do it) 
+
+> Spend lines of code describing the specific steps used to achieve the desired results
+
+```javascript
+// Imperative Paradigm
+var array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for(let i = 0; i < array.length; i++) {
+    array[i] = Math.pow(array[i], 2);
+  }
+array; //-> [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+
+### Declarative Paradigm flow: "What to do" parts to be tested: 
+On declarative approach we control the flow, a functional approach involves composing the problem as a set of functions to be executed (what to do), this also encourages the creation of multiple "singular functions", functions that perform only one task making these multiple functions more comprehensive and easy to test.
+
+> DC abstracts the flow control process, and instead spend lines of code describing the data flow: What to do.
+
+```javascript
+// Declarative programs
+// unit-test will be easier 
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => Math.pow(num, 2));
+```
+
+
+## State to be tested:
+### Imperative programming test:
+The functions that are evaluated are the main path with specific steps to follow while the state is changing and transforming data across time, variables are used to store the current state of the program.
+These steps and variables need to be mock in order to achieve some desired order of execution steps.
+
+### Functional programming test: 
+FP is stateless. This lack of state allows a functional language to be reasoned at just looking at a purely functional process: input & output also order of execution has low importance because functions are pure.
+
+> the outcome of a function is dependent only on the input and nothing else
+
+## Moving parts
+
+> OO makes code understandable by encapsulating moving parts.   
+  FP makes code understandable by minimizing moving parts.
+  - Michael Feathers
+
+The logic is minimal: less logic = less new logic to be tested.
+We should understand these moving parts as state changes (also known as state mutations). In functional programming, we try to avoid dealing with state mutations instead of encapsulating them like in OOP.
+
+
+## Code pure & "test pure":
+In a sense, we want to test functions as we code one unit of code: in isolation.
+
+That's to say: Given an input, it responds with the proper same output. We can test a specific "unit" of code, alone and isolated from other units of code no test should ever depend on another test, tests should be able to run simultaneously and in any order. 
+
+For example, pure functions are easier to debug and to execute in parallel due to their lack of side effects. These features are also reinforced by Jasmine3+ and Jest. pure functions are easier to debug and to execute in parallel due to their lack of side effects. 
+
+> Writing Tests: Because most of the Redux code you write are functions, and many of them are pure, they are easy to test without mocking. 
+- Redux Documentation: https://redux.js.org/recipes/writing-tests
+
+---
+
+## Conclusion:
+FP treats functions as building blocks by relying on first-class, higher-order functions to improve the modularity and reusability of your code. Declarative paradigm, pure functions and stateless feature in combination with function-oriented architecture give us the possibility of creating test-oriented code that generates a reliable, faster, predictable, easy to maintain unit-tests and can make you sleep even better at night.
+
+
+---
+
+#### [NEXT] Functional Programming related stories:
+<a href="https://dev.to/leolanese/functional-programming-buzzwords-36c1" target="_blank">* Functional Programming buzzwords</a>
+<a href="https://dev.to/leolanese/functional-programming-from-the-reactjs-and-angular-point-of-view-21f">* Functional Programming from the ReactJS and Angular point-of-view</a>
+
+---
+<h4> Thanks! </h4>
+<h5> { 'Leo Lanese',<br>
+       'Building Inspiring Responsive Reactive Solutions',<br>
+       'London, UK' }<br>
+</h5>
+<h5>Portfolio
+<a href="http://www.leolanese.com" target="_blank">http://www.leolanese.com</a>
+</h5>
+<h5>Twitter:
+<a href="http://twitter.com/LeoLaneseltd" target="_blank">twitter.com/LeoLaneseltd</a>
+</h5>
+<h5>Questions / Suggestion / Recommendation ?
+<a href="mail:to">developer@leolanese.com</a>
+</h5>
+<h5>DEV.to:
+<a href="http://www.dev.to/leolanese" target="_blank">www.dev.to/leolanese</a>
+</h5>
+<h5>Blog:
+<a href="http://www.leolanese.com/blog" target="_blank">leolanese.com/blog</a>
+</h5>
+
+
+
+
+
+
